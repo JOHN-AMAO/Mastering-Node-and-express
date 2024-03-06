@@ -1,4 +1,5 @@
 "use client";
+import axios from "axios";
 import { useState } from "react";
 
 export default function Home() {
@@ -13,9 +14,11 @@ export default function Home() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    console.log(formData);
+    const data = formData;
+    await axios.post("http://localhost:5000/api/database", data);
+
     // Add your logic for form submission here
   };
 
