@@ -1,6 +1,7 @@
 "use client";
 import axios from "axios";
 import Link from "next/link";
+
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -17,6 +18,10 @@ export default function Home() {
     };
     getData();
   }, []);
+
+  const deletePost = async (id: any) => {
+    await axios.delete(`http://localhost:5000/api/database/${id}`);
+  };
 
   return (
     <main className='flex min-h-screen text-white flex-col '>
@@ -39,7 +44,12 @@ export default function Home() {
             <p>{user.age}</p>
             <p> {user.class}</p>
           </div>
-          <button className='bg-red text-red-800 p-4'>Delete</button>
+          <button
+            className='bg-red text-red-800 p-4'
+            onClick={() => deletePost(user._id)}
+          >
+            Delete
+          </button>
         </div>
       ))}
     </main>
